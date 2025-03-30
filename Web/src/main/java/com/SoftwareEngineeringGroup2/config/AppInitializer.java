@@ -17,22 +17,22 @@ public class AppInitializer implements CommandLineRunner {
 
     @Autowired
     private AuthService authService;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Override
     public void run(String... args) {
         // 初始化管理员账号
         initializeAdmin();
     }
-    
+
     private void initializeAdmin() {
         try {
             // 检查管理员账号是否已存在
             if (authService.findByUsername("admin") == null) {
                 logger.info("初始化管理员账号...");
-                
+
                 User admin = User.builder()
                         .username("admin")
                         .password(passwordEncoder.encode("admin114514"))
@@ -40,7 +40,7 @@ public class AppInitializer implements CommandLineRunner {
                         .phone("13800000000")
                         .role(UserRole.ADMIN)
                         .build();
-                
+
                 authService.saveUser(admin);
                 logger.info("管理员账号初始化成功");
             } else {

@@ -8,6 +8,7 @@ D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\control
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\JwtConfig.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\AppInitializer.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\dto\LoginDto.java
+D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\dto\RegisterDto.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\StoreService.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\controller\UserController.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\impl\StoreServiceImpl.java
