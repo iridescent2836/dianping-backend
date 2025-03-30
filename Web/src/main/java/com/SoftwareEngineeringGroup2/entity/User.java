@@ -6,6 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Schema(description = "用户实体类")
 @Entity
@@ -14,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User implements UserDetails {
     @Schema(description = "用户ID", example = "1")
     @Id
     @Column(name = "user_id")
@@ -41,6 +48,32 @@ public class User {
     @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
     // 用户角色枚举
     public enum UserRole {

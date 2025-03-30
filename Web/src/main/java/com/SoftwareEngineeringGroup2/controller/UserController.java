@@ -12,12 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-<<<<<<< HEAD
-import java.util.List;
-import io.swagger.v3.oas.annotations.*;
-import org.springframework.web.server.ResponseStatusException;
-=======
->>>>>>> c552b265eee1546dfe3cee66cf248a75aa54085b
+
 
 @RestController
 @RequestMapping("/api")
@@ -35,10 +30,8 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDto request) {
         System.out.println(request.getUsername());
-        User user = userService.login(request);
-        return ResponseEntity.ok("登录成功，用户角色: " + user.getRole());
+        String token = userService.login(request);
+        return ResponseEntity.ok(token);
     }
-
-
 
 }
