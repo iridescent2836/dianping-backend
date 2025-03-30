@@ -25,4 +25,6 @@ public interface AuthService {
      * @return 当前登录的用户对象
      */
     User getCurrentUser();
+
+    // 保存当前登录用户到进程上下文中
 }

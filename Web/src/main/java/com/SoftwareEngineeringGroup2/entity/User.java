@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.List;
 
 @Schema(description = "用户实体类")
 @Entity
@@ -14,7 +18,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+
+public class User implements UserDetails {
     @Schema(description = "用户ID", example = "1")
     @Id
     @Column(name = "user_id")
@@ -32,7 +37,7 @@ public class User {
     @Schema(description = "用户邮箱", example = "zhangsan@example.com")
     @Column(name = "user_email", nullable = false)
     private String email;
-    
+
     @Schema(description = "用户手机号", example = "13800138000")
     @Column(name = "user_phone", nullable = false, length = 11)
     private String phone;
@@ -45,7 +50,32 @@ public class User {
     // 用户角色枚举
     public enum UserRole {
         ADMIN, // 管理员
-        USER,  // 普通用户
+        USER, // 普通用户
         MERCHANT // 商户
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> "ROLE_" + role.name());
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

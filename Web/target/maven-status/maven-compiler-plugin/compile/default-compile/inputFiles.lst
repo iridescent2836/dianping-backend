@@ -3,6 +3,7 @@ D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\entity\Store.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\entity\User.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\AuthService.java
+D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\WebConfig.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\repository\UserRepository.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\controller\StoreController.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\JwtConfig.java
