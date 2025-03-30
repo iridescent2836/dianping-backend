@@ -8,8 +8,6 @@ import com.SoftwareEngineeringGroup2.entity.User;
 import com.SoftwareEngineeringGroup2.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import io.swagger.v3.oas.annotations.*;
 
 @RestController
 @RequestMapping("/api/auth")

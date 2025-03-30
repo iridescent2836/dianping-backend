@@ -24,8 +24,8 @@ public class StoreServiceImpl implements StoreService {
         List<String> validCategories = List.of("酒店", "交通", "餐饮", "景区门票");
         for (String category : categories) {
             if (!validCategories.contains(category)) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, 
-                    "无效的商品类别：" + category + "。有效类别为：酒店、交通、餐饮、景区门票");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "无效的商品类别：" + category + "。有效类别为：酒店、交通、餐饮、景区门票");
             }
         }
     }
@@ -51,10 +51,10 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<Store> getStoresByUserRole(User user) {
-        if (user.getRole().equals("ADMIN")) {
+        if (user.getRole().equals(User.UserRole.ADMIN)) {
             // 管理员可以查看所有商店
             return storeRepository.findAll();
-        } else if (user.getRole().equals("MERCHANT")) {
+        } else if (user.getRole().equals(User.UserRole.MERCHANT)) {
             // 商户只能查看自己的商店
             return storeRepository.findByOwner(user);
         } else {
@@ -72,9 +72,9 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public Store updateStore(Long id, StoreRegistrationDto storeDto, User currentUser) {
         Store store = getStoreById(id);
-        
+
         // 验证权限：只有店主或管理员可以修改店铺信息
-        if (!store.getOwner().equals(currentUser) && !currentUser.getRole().equals("ADMIN")) {
+        if (!store.getOwner().equals(currentUser) && !currentUser.getRole().equals(User.UserRole.ADMIN)) {
             throw new AccessDeniedException("没有权限修改该商店信息");
         }
 

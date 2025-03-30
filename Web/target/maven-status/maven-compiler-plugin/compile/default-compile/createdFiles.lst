@@ -1,4 +1,5 @@
 com\SoftwareEngineeringGroup2\entity\User$UserRole.class
+com\SoftwareEngineeringGroup2\dto\RegisterDto.class
 com\SoftwareEngineeringGroup2\config\SecurityConfig.class
 com\SoftwareEngineeringGroup2\config\SwaggerConfig.class
 com\SoftwareEngineeringGroup2\repository\StoreRepository.class

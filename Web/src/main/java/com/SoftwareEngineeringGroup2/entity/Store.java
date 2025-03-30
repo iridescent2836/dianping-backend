@@ -57,12 +57,13 @@ public class Store {
     @Schema(description = "商店状态", example = "PENDING")
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private StoreStatus status = StoreStatus.PENDING;
 
     public enum StoreStatus {
-        PENDING,    // 待审核
-        APPROVED,   // 已审核通过
-        REJECTED    // 已拒绝
+        PENDING, // 待审核
+        APPROVED, // 已审核通过
+        REJECTED // 已拒绝
     }
 
     @Schema(description = "店主用户ID", example = "1")

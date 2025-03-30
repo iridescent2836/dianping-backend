@@ -3,13 +3,10 @@ package com.SoftwareEngineeringGroup2.service;
 import com.SoftwareEngineeringGroup2.dto.LoginDto;
 import com.SoftwareEngineeringGroup2.dto.RegisterDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.SoftwareEngineeringGroup2.repository.UserRepository;
 import com.SoftwareEngineeringGroup2.entity.User;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
