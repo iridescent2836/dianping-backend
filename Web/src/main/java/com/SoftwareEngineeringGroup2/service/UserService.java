@@ -19,9 +19,9 @@ public class UserService {
 
     public void register(RegisterDto request) {
         // 校验密码一致性
-        if (!request.getPassword().equals(request.getConfirmPassword())) {
-            throw new IllegalArgumentException("两次密码输入不一致");
-        }
+//        if (!request.getPassword().equals(request.getConfirmPassword())) {
+//            throw new IllegalArgumentException("两次密码输入不一致");
+//        }
 
         // 检查用户名唯一性
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -48,4 +48,5 @@ public class UserService {
         }
         return user;
     }
+
 }

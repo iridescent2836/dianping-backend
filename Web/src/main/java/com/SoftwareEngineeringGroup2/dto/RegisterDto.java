@@ -22,16 +22,6 @@ public class RegisterDto {
             example = "user_123")
     private String username;
 
-    @NotBlank(message = "密码不能为空")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d|.*[-_]).{6,32}$", message = "密码需包含字母和数字/符号")
-    @Schema(description = "密码（需包含字母和数字/符号，长度6-32）", requiredMode = Schema.RequiredMode.REQUIRED,
-            example = "Passw0rd!")
-    private String password;
-
-    @NotBlank(message = "确认密码不能为空")
-    @Schema(description = "确认密码（需与密码一致）", requiredMode = Schema.RequiredMode.REQUIRED,
-            example = "Passw0rd!")
-    private String confirmPassword;
 
     @NotBlank(message = "手机号不能为空")
     @Pattern(regexp = "^1\\d{10}$", message = "手机号格式错误")
@@ -44,4 +34,10 @@ public class RegisterDto {
     @Schema(description = "标准邮箱地址", requiredMode = Schema.RequiredMode.REQUIRED,
             example = "user@example.com", format = "email")
     private String email;
+
+    @NotBlank(message = "密码不能为空")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d|.*[-_]).{6,32}$", message = "密码需包含字母和数字/符号")
+    @Schema(description = "密码（需包含字母和数字/符号，长度6-32）", requiredMode = Schema.RequiredMode.REQUIRED,
+            example = "Passw0rd!")
+    private String password;
 }

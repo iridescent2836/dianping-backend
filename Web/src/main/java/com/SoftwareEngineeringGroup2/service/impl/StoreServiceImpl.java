@@ -35,13 +35,14 @@ public class StoreServiceImpl implements StoreService {
         validateCategories(storeDto.getCategories());
 
         Store store = Store.builder()
-                .name(storeDto.getName())
+                .name(storeDto.getShopName())
                 .description(storeDto.getDescription())
                 .address(storeDto.getAddress())
                 .capital(storeDto.getCapital())
                 .registerDate(LocalDate.now())
-                .ownerIdCard(storeDto.getOwnerIdCard())
+                .ownerIdCard(storeDto.getIdNumber())
                 .owner(owner)
+                .registerDate(storeDto.getRegistrationDate())
                 .categories(storeDto.getCategories())
                 .status(Store.StoreStatus.PENDING)
                 .build();
@@ -80,11 +81,11 @@ public class StoreServiceImpl implements StoreService {
 
         validateCategories(storeDto.getCategories());
 
-        store.setName(storeDto.getName());
+        store.setName(storeDto.getShopName());
         store.setDescription(storeDto.getDescription());
         store.setAddress(storeDto.getAddress());
         store.setCapital(storeDto.getCapital());
-        store.setOwnerIdCard(storeDto.getOwnerIdCard());
+        store.setOwnerIdCard(storeDto.getIdNumber());
         store.setCategories(storeDto.getCategories());
 
         return storeRepository.save(store);

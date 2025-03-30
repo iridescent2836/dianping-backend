@@ -8,11 +8,11 @@ import lombok.Data;
 @Schema(description = "登录数据传输对象")
 public class LoginDto {
 
-    @Schema(description = "用户名", example = "zhangsan")
+    @Schema(description = "用户名", example = "user_123")
     @NotBlank(message = "用户名不能为空")
     private String username;
 
-    @Schema(description = "密码", example = "password123")
+    @Schema(description = "密码", example = "Passw0rd!")
     @NotBlank(message = "密码不能为空")
     private String password;
 }
