@@ -4,8 +4,8 @@
 后端代码
 
 ## 项目环境
-- Java version: 22.0.1 (build 22.0.1+8-16)
-- Spring Boot version: 3.2.0
+- Java version: 17
+- Spring Boot version: 3.2.3
 - Maven version: 3.9.8
 - MySQL version: 8.0.36 (MySQL Community Server - GPL)
 - 本项目是一个基于Spring Boot的后端应用，使用MySQL作为数据库，采用JPA进行数据持久化。
@@ -16,14 +16,14 @@
 ### 环境要求
 - OS: Windows 11 (x86_64)
 - MySQL 8.0.36+
-- JDK 22.0.1+
+- JDK 17+
 - Maven 3.9.8+
 - Default locale: zh_CN
 - Platform encoding: UTF-8
 
 ### 开发工具配置
 1. JDK配置
-   - 安装 Java 22.0.1
+   - 安装 Java 17
    - 设置 JAVA_HOME 环境变量
 
 2. Maven配置
