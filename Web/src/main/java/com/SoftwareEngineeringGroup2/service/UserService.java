@@ -38,13 +38,17 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public String login(LoginDto request) {
+    public User login(LoginDto request) {
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("用户名不存在"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("密码错误");
         }
+        return user;
+    }
+
+    public String generateToken(User user) {
         return jwtConfig.generateToken(user);
     }
 

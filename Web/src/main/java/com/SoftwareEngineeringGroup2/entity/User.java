@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
 import java.util.List;
 
 @Schema(description = "用户实体类")
@@ -21,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class User implements UserDetails {
     @Schema(description = "用户ID", example = "1")
     @Id
@@ -39,7 +42,7 @@ public class User implements UserDetails {
     @Schema(description = "用户邮箱", example = "zhangsan@example.com")
     @Column(name = "user_email", nullable = false)
     private String email;
-    
+
     @Schema(description = "用户手机号", example = "13800138000")
     @Column(name = "user_phone", nullable = false, length = 11)
     private String phone;
@@ -48,11 +51,6 @@ public class User implements UserDetails {
     @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -78,7 +76,14 @@ public class User implements UserDetails {
     // 用户角色枚举
     public enum UserRole {
         ADMIN, // 管理员
-        USER,  // 普通用户
+        USER, // 普通用户
         MERCHANT // 商户
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> "ROLE_" + role.name());
+    }
+
+
 }

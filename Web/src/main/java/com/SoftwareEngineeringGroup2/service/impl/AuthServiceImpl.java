@@ -24,6 +24,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User saveUser(User user) {
+        // 保存用户到数据库
         return userRepository.save(user);
     }
 
@@ -40,4 +41,5 @@ public class AuthServiceImpl implements AuthService {
         }
         return user;
     }
+
 }
