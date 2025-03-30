@@ -1,30 +1,31 @@
 package com.SoftwareEngineeringGroup2.controller;
 
+import com.SoftwareEngineeringGroup2.dto.LoginDto;
+import com.SoftwareEngineeringGroup2.dto.RegisterDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.SoftwareEngineeringGroup2.entity.User;
 import com.SoftwareEngineeringGroup2.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import io.swagger.v3.oas.annotations.*;
 
 @RestController
-@RequestMapping("/lab1")
+@RequestMapping("/api/auth")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/users")
-    @Operation(summary = "创建用户", description = "创建新用户")
-    public User createUser(
-        @RequestParam @Parameter(description = "用户名") String username,
-        @RequestParam @Parameter(description = "邮箱") String email
-    ) {
-        return userService.createUser(username, email);
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterDto request) {
+        userService.register(request);
+        return ResponseEntity.ok("注册成功");
     }
 
-    @GetMapping("/users")
-    @Operation(summary = "获取所有用户", description = "获取所有用户信息")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDto request) {
+        User user = userService.login(request);
+        return ResponseEntity.ok("登录成功，用户角色: " + user.getRole());
     }
 }

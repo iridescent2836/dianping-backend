@@ -18,7 +18,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("用户名不存在"));
     }
 
     @Override
