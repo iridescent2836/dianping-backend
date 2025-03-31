@@ -26,6 +26,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtConfig jwtConfig;
 
 
     @PostMapping("/register")
@@ -56,7 +58,7 @@ public class UserController {
 
         // 4. 生成JWT令牌
 
-        String token = userService.generateToken(user);
+        String token = jwtConfig.generateToken(user);
 
         // 5. 返回响应
         return ResponseEntity.ok(token);

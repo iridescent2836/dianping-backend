@@ -14,7 +14,11 @@ import com.SoftwareEngineeringGroup2.entity.User;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtConfig jwtConfig;
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("用户名不存在"));
+    }
 
     public void register(RegisterDto request) {
         // 校验密码一致性
@@ -48,8 +52,5 @@ public class UserService {
         return user;
     }
 
-    public String generateToken(User user) {
-        return jwtConfig.generateToken(user);
-    }
 
 }
