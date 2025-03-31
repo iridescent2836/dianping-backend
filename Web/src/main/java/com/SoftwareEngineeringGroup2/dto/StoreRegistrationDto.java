@@ -41,8 +41,8 @@ public class StoreRegistrationDto {
     @Size(min = 1, max = 5, message = "商品类别数量必须在1-5个之间")
     private List<String> categories;
 
-    @Schema(description = "注册时间", example = "2025/03/09")
+    @Schema(description = "注册时间", example = "2025-03-31")
     @NotNull(message = "注册时间不能为空")
-    @JsonFormat(pattern = "yyyy/MM/dd") // 定义日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd") // 定义日期格式
     private LocalDate registrationDate;
 }

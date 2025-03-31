@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,6 +42,7 @@ public class Store {
 
     @Schema(description = "注册时间", example = "2023-01-01")
     @Column(name = "store_register_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registerDate;
 
     @Schema(description = "店主身份证号", example = "110101199001011234")
