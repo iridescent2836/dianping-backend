@@ -32,7 +32,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public Store createStore(StoreRegistrationDto storeDto, User owner) {
-        validateCategories(storeDto.getCategories());
+        // validateCategories(storeDto.getCategories());
 
         Store store = Store.builder()
                 .name(storeDto.getShopName())

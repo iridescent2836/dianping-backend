@@ -1,4 +1,5 @@
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\WebApplication.java
+D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\JwtAuthenticationFilter.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\SecurityConfig.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\entity\Store.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\entity\User.java
@@ -7,7 +8,9 @@ D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\repository\UserRepository.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\controller\StoreController.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\JwtConfig.java
+D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\utils\JwtUtils.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\AppInitializer.java
+D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\CustomUserDetailsService.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\dto\LoginDto.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\dto\RegisterDto.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\StoreService.java
@@ -15,6 +18,7 @@ D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\control
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\impl\StoreServiceImpl.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\dto\StoreRegistrationDto.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\repository\StoreRepository.java
+D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\dto\UserInfoDto.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\config\SwaggerConfig.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\impl\AuthServiceImpl.java
 D:\SoftWareClass\backend\Web\src\main\java\com\SoftwareEngineeringGroup2\service\UserService.java
