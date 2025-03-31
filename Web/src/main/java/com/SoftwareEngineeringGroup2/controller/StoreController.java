@@ -27,7 +27,7 @@ public class StoreController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping
+    @PostMapping("/open-shop")
     @Operation(summary = "创建商店", description = "商户创建新商店")
     @PreAuthorize("hasAuthority('MERCHANT')")
     public ResponseEntity<Store> createStore(@Valid @RequestBody StoreRegistrationDto storeDto) {
