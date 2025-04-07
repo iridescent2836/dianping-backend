@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stores")
+@RequestMapping("/api")
 @Tag(name = "商店管理", description = "商店相关接口")
 public class StoreController {
 
@@ -37,7 +37,7 @@ public class StoreController {
         return ResponseEntity.ok(store);
     }
 
-    @GetMapping
+    @GetMapping("/stores")
     @Operation(summary = "获取商店列表", description = "获取商店列表，根据用户角色返回不同结果")
     public ResponseEntity<List<Store>> getStores() {
         User currentUser = authService.getCurrentUser();
