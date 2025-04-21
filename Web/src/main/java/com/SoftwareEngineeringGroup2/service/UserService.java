@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.SoftwareEngineeringGroup2.repository.UserRepository;
 import com.SoftwareEngineeringGroup2.entity.User;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -18,6 +20,9 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("用户名不存在"));
+    }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public void register(RegisterDto request) {

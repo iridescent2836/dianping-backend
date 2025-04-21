@@ -64,4 +64,15 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 
+    @GetMapping("/user-info")
+    public ResponseEntity<?> userInfo(@AuthenticationPrincipal UserDetails userDetails) {
+        User user = userService.getUserByUsername(userDetails.getUsername());
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> users() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
 }
