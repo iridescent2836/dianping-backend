@@ -78,3 +78,7 @@
 - `status`: 商店状态
   - 可选值: PENDING(待审核), APPROVED(已审核通过), REJECTED(已拒绝)
 - `owner`: 店主用户ID (关联User实体)
+
+
+## 文档及调试查看
+访问http://localhost:8000/doc.html

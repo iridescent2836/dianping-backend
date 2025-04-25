@@ -1,61 +1,28 @@
 package com.SoftwareEngineeringGroup2.service;
 
-import com.SoftwareEngineeringGroup2.config.JwtConfig;
 import com.SoftwareEngineeringGroup2.dto.LoginDto;
 import com.SoftwareEngineeringGroup2.dto.RegisterDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import com.SoftwareEngineeringGroup2.repository.UserRepository;
+import com.SoftwareEngineeringGroup2.dto.UserUpdateDto;
 import com.SoftwareEngineeringGroup2.entity.User;
 
-import java.util.List;
+public interface UserService {
+    User register(RegisterDto registerDto);
 
-@Service
-@RequiredArgsConstructor
-public class UserService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    String login(LoginDto loginDto);
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("用户名不存在"));
-    }
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    User getUser(Long userId);
 
-    public void register(RegisterDto request) {
-        // 校验密码一致性
-//        if (!request.getPassword().equals(request.getConfirmPassword())) {
-//            throw new IllegalArgumentException("两次密码输入不一致");
-//        }
+    User updateUser(Long userId, UserUpdateDto userDto);
 
-        // 检查用户名唯一性
-        if (userRepository.existsByUsername(request.getUsername())) {
-            throw new IllegalArgumentException("用户名已存在");
-        }
+    void deleteUser(Long userId);
 
-        // 创建用户并加密密码
-        User user = new User();
-        user.setRole(request.getRole());
-        user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setPhone(request.getPhone());
-        user.setEmail(request.getEmail());
+    User getUserByUsername(String username);
 
-        userRepository.save(user);
-    }
+    boolean existsByUsername(String username);
 
-    public User login(LoginDto request) {
-        User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("用户名不存在"));
+    boolean existsByEmail(String email);
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("密码错误");
-        }
-        return user;
-    }
+    boolean existsByPhone(String phone);
 
-
+    User save(User user);
 }

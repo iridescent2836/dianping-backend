@@ -1,48 +1,48 @@
 package com.SoftwareEngineeringGroup2.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Schema(description = "商店注册数据传输对象")
+@Schema(description = "商店注册信息")
 public class StoreRegistrationDto {
-    @Schema(description = "商店名称", example = "XX旅游商店")
     @NotBlank(message = "商店名称不能为空")
-    @Size(min = 2, max = 20, message = "商店名称长度必须在2-20个字符之间")
-    private String shopName;
+    @Size(min = 2, max = 50, message = "商店名称长度必须在2-50个字符之间")
+    @Schema(description = "商店名称", example = "示例商店")
+    private String name;
 
-    @Schema(description = "商店简介", example = "提供高质量的旅游服务")
-    @NotBlank(message = "商店简介不能为空")
-    @Size(max = 500, message = "商店简介不能超过500个字符")
+    @Size(max = 500, message = "商店描述不能超过500个字符")
+    @Schema(description = "商店描述", example = "这是一家示例商店")
     private String description;
 
-    @Schema(description = "备案地址", example = "北京市海淀区XX街XX号")
-    @NotBlank(message = "备案地址不能为空")
-    @Size(max = 100, message = "备案地址不能超过100个字符")
+    @Schema(description = "商店logo URL", example = "https://example.com/logo.png")
+    private String logoUrl;
+
+    @NotBlank(message = "商店地址不能为空")
+    @Size(max = 200, message = "地址长度不能超过200个字符")
+    @Schema(description = "商店地址", example = "北京市海淀区")
     private String address;
 
-    @Schema(description = "注册资金", example = "10000")
+    @NotBlank(message = "联系电话不能为空")
+    @Pattern(regexp = "^1[3-9]\\d{9}$", message = "请输入正确的手机号码")
+    @Schema(description = "联系电话", example = "13800138000")
+    private String phone;
+
     @NotNull(message = "注册资金不能为空")
-    @Min(value = 1000, message = "注册资金不能低于1000")
+    @Schema(description = "注册资金", example = "10000.00")
     private Double capital;
 
+    @NotBlank(message = "店主身份证号不能为空")
+    @Pattern(regexp = "^[1-9]\\d{5}(18|19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[0-9Xx]$", message = "请输入正确的身份证号码")
     @Schema(description = "店主身份证号", example = "110101199001011234")
-    @NotBlank(message = "身份证号不能为空")
-    @Pattern(regexp = "^[1-9]\\d{5}(18|19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[0-9Xx]$", message = "请输入有效的身份证号码")
-    private String idNumber;
+    private String ownerIdCard;
 
-    @Schema(description = "商品类别", example = "[\"旅游\", \"住宿\"]")
-    @NotEmpty(message = "商品类别不能为空")
-    @Size(min = 1, max = 5, message = "商品类别数量必须在1-5个之间")
+    @Schema(description = "商品类别", example = "[\"酒店\", \"交通\"]")
     private List<String> categories;
-
-    @Schema(description = "注册时间", example = "2025-03-31")
-    @NotNull(message = "注册时间不能为空")
-    @JsonFormat(pattern = "yyyy-MM-dd") // 定义日期格式
-    private LocalDate registrationDate;
 }

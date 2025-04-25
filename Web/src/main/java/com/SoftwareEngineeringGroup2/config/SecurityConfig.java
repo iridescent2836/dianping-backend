@@ -32,17 +32,17 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");  // Allow all origins
+        corsConfiguration.addAllowedOrigin("*"); // Allow all origins
         corsConfiguration.addAllowedMethod("GET"); // Allow specific HTTP methods
         corsConfiguration.addAllowedMethod("POST");
         corsConfiguration.addAllowedMethod("PUT");
         corsConfiguration.addAllowedMethod("DELETE");
         corsConfiguration.addAllowedMethod("OPTIONS");
         corsConfiguration.addAllowedHeader("*"); // Allow all headers
-        corsConfiguration.setMaxAge(3600L);  // Set max age for CORS pre-flight
+        corsConfiguration.setMaxAge(3600L); // Set max age for CORS pre-flight
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration);  // Apply CORS config to all URLs
+        source.registerCorsConfiguration("/**", corsConfiguration); // Apply CORS config to all URLs
 
         return source;
     }
@@ -53,8 +53,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/register", "/swagger-ui/**", "/swagger-ui.html",
-                                "/v3/api-docs/**")
+                        .requestMatchers("/api/login", "/api/register",
+                                "/doc.html", "/webjars/**",
+                                "/v3/api-docs/**", "/swagger-resources/**", "/swagger-resources")
                         .permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())

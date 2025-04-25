@@ -16,8 +16,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
      * 通过用户名判断用户是否存在（方法名自动生成查询）
+     * 
      * @param username 用户名
      * @return 是否存在
      */
     boolean existsByUsername(String username);
+
+    // 根据手机号检查用户是否存在
+    boolean existsByPhone(String phone);
+
+    // 根据邮箱检查用户是否存在
+    boolean existsByEmail(String email);
 }
