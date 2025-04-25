@@ -13,8 +13,12 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class AuthServiceImpl implements AuthService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public AuthServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User findByUsername(String username) {

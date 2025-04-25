@@ -48,9 +48,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @Schema(description = "用户账户信息")
-    private Account account;
+    @Column(name = "account_id")
+    private Long accountId;
 
     @Schema(hidden = true)
     @Override

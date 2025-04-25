@@ -33,7 +33,7 @@ public class Knife4jConfig {
                                 .name("Apache 2.0")
                                 .url("http://www.apache.org/licenses/LICENSE-2.0.html")))
                 .components(new Components()
-                        .addSecuritySchemes("Bearer Token", new SecurityScheme()
+                        .addSecuritySchemes("Authorization", new SecurityScheme()
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme("bearer")
                                 .bearerFormat("JWT")

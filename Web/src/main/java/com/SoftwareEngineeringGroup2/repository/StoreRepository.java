@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Long> {
-    List<Store> findByMerchantId(Long merchantId);
+    List<Store> findByOwnerId(Long merchantId);
 
-    List<Store> findByStatus(Integer status);
+    List<Store> findByStatus(Store.StoreStatus status);
 }

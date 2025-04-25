@@ -8,7 +8,7 @@ import com.SoftwareEngineeringGroup2.entity.User;
 public interface UserService {
     User register(RegisterDto registerDto);
 
-    String login(LoginDto loginDto);
+    User login(LoginDto loginDto);
 
     User getUser(Long userId);
 
@@ -25,4 +25,5 @@ public interface UserService {
     boolean existsByPhone(String phone);
 
     User save(User user);
+
 }

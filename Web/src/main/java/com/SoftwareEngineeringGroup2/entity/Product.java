@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,10 +24,9 @@ public class Product {
     @Schema(description = "商品ID", example = "1")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    @Schema(description = "所属商店")
-    private Store store;
+    @Column(name = "store_id", nullable = false)
+    @Schema(description = "所属商店ID")
+    private Long storeId;
 
     @Column(length = 100)
     @Schema(description = "商品名称", example = "示例商品")
@@ -47,9 +47,11 @@ public class Product {
     @Schema(description = "商品状态：0-待审核，1-已上架，2-已下架，3-审核不通过", example = "0")
     private Integer status;
 
+    @Column(name = "create_time")
     @Schema(description = "创建时间")
-    private Long createTime;
+    private LocalDateTime createTime;
 
+    @Column(name = "update_time")
     @Schema(description = "更新时间")
-    private Long updateTime;
+    private LocalDateTime updateTime;
 }

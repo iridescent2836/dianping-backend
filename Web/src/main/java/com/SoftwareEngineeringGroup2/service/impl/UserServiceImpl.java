@@ -1,11 +1,11 @@
 package com.SoftwareEngineeringGroup2.service.impl;
-
 import com.SoftwareEngineeringGroup2.dto.LoginDto;
 import com.SoftwareEngineeringGroup2.dto.RegisterDto;
 import com.SoftwareEngineeringGroup2.dto.UserUpdateDto;
 import com.SoftwareEngineeringGroup2.entity.User;
 import com.SoftwareEngineeringGroup2.repository.UserRepository;
 import com.SoftwareEngineeringGroup2.service.UserService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public User login(LoginDto loginDto) {
         User user = userRepository.findByUsername(loginDto.getUsername())
                 .orElseThrow(() -> new RuntimeException("用户名不存在"));
 
@@ -130,7 +130,6 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("密码错误");
         }
 
-        // 这里应该返回 JWT token，但需要先实现 JWT 相关功能
-        return "登录成功";
+        return user;
     }
 }

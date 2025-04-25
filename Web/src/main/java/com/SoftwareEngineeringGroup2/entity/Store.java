@@ -79,19 +79,13 @@ public class Store {
     @Schema(description = "商店状态")
     private StoreStatus status;
 
-    @Column(name = "review_comment", columnDefinition = "TEXT")
     @Schema(description = "审核意见")
+    @Column(name = "review_comment", columnDefinition = "TEXT")
     private String reviewComment;
 
     @Schema(description = "店主用户ID", example = "1")
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User owner;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "merchant_id", nullable = false)
-    @Schema(description = "所属商户")
-    private User merchant;
+    @Column(name = "user_id", nullable = false)
+    private Long ownerId;
 
     @Column(name = "logo_url")
     @Schema(description = "商店logo URL", example = "https://example.com/logo.png")
@@ -105,7 +99,7 @@ public class Store {
     @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @Transient
     @Schema(description = "商店商品列表")
     private List<Product> products;
 

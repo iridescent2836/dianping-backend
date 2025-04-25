@@ -5,12 +5,15 @@ import com.SoftwareEngineeringGroup2.entity.*;
 import com.SoftwareEngineeringGroup2.repository.ProductApplicationRepository;
 import com.SoftwareEngineeringGroup2.repository.ProductRepository;
 import com.SoftwareEngineeringGroup2.repository.StoreRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,19 +27,19 @@ public class ProductService {
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("商店不存在"));
 
-        if (!store.getMerchant().getId().equals(merchant.getId())) {
+        if (!store.getOwnerId().equals(merchant.getId())) {
             throw new RuntimeException("无权操作此商店");
         }
 
         Product product = Product.builder()
-                .store(store)
+                .storeId(store.getId())
                 .name(productDto.getName())
                 .description(productDto.getDescription())
                 .price(productDto.getPrice())
                 .imageUrl(productDto.getImageUrl())
                 .status(0) // 待审核
-                .createTime(Instant.now().toEpochMilli())
-                .updateTime(Instant.now().toEpochMilli())
+                .createTime(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
                 .build();
 
         product = productRepository.save(product);
@@ -60,7 +63,10 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("商品不存在"));
 
-        if (!product.getStore().getMerchant().getId().equals(merchant.getId())) {
+        Store store = storeRepository.findById(product.getStoreId())
+                .orElseThrow(() -> new EntityNotFoundException("店铺不存在"));
+
+        if (!store.getOwnerId().equals(merchant.getId())) {
             throw new RuntimeException("无权操作此商品");
         }
 
@@ -69,7 +75,7 @@ public class ProductService {
         product.setPrice(productDto.getPrice());
         product.setImageUrl(productDto.getImageUrl());
         product.setStatus(0); // 待审核
-        product.setUpdateTime(Instant.now().toEpochMilli());
+        product.setUpdateTime(LocalDateTime.now());
 
         product = productRepository.save(product);
 
@@ -92,12 +98,12 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("商品不存在"));
 
-        if (!product.getStore().getMerchant().getId().equals(merchant.getId())) {
+        if (!product.getStoreId().equals(merchant.getId())) {
             throw new RuntimeException("无权操作此商品");
         }
 
         product.setStatus(2); // 已下架
-        product.setUpdateTime(Instant.now().toEpochMilli());
+        product.setUpdateTime(LocalDateTime.now());
         productRepository.save(product);
     }
 

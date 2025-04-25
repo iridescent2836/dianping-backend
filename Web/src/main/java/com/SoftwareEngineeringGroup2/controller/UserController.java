@@ -47,9 +47,28 @@ public class UserController {
     @ApiOperationSupport(order = 2, author = "软件工程第二组")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDto request) {
         // 1. 验证用户凭证
-        String token = userService.login(request);
+        User user = userService.login(request); // 内部包含密码验证逻辑
 
-        // 2. 返回响应
+        // 2. 创建认证对象
+        UserDetails userDetails = org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPassword()) // 存储加密后的密码
+                .roles(user.getRole().name()) // 转换角色为Spring Security格式
+                .build();
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                null,
+                userDetails.getAuthorities());
+
+        // 3. 更新安全上下文
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // 4. 生成JWT令牌
+
+        String token = jwtConfig.generateToken(user);
+
+        // 5. 返回响应
         return ResponseEntity.ok(token);
     }
 

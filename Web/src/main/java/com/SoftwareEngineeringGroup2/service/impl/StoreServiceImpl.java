@@ -17,8 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
-    private final UserRepository userRepository;
-
     @Override
     @Transactional
     public Store createStore(StoreRegistrationDto storeDto, User user) {
@@ -36,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
                 .registerDate(LocalDateTime.now())
                 .ownerIdCard(storeDto.getOwnerIdCard())
                 .categories(storeDto.getCategories())
-                .merchant(user)
+                .ownerId(user.getId())
                 .status(Store.StoreStatus.PENDING)
                 .build();
 
@@ -48,7 +46,7 @@ public class StoreServiceImpl implements StoreService {
     public Store updateStore(Long id, StoreRegistrationDto storeDto, User user) {
         Store existingStore = storeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("商店不存在"));
-        if (!existingStore.getMerchant().getId().equals(user.getId())) {
+        if (!existingStore.getOwnerId().equals(user.getId())) {
             throw new RuntimeException("无权修改此商店");
         }
 
@@ -69,7 +67,7 @@ public class StoreServiceImpl implements StoreService {
     public void deleteStore(Long storeId, Long merchantId) {
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("商店不存在"));
-        if (!store.getMerchant().getId().equals(merchantId)) {
+        if (!store.getOwnerId().equals(merchantId)) {
             throw new RuntimeException("无权删除此商店");
         }
         storeRepository.delete(store);
@@ -90,9 +88,9 @@ public class StoreServiceImpl implements StoreService {
         if (user.getRole().equals(User.UserRole.ADMIN)) {
             return storeRepository.findAll();
         } else if (user.getRole().equals(User.UserRole.MERCHANT)) {
-            return storeRepository.findByMerchantId(user.getId());
+            return storeRepository.findByOwnerId(user.getId());
         } else {
-            return storeRepository.findByStatus(Store.StoreStatus.APPROVED.ordinal());
+            return storeRepository.findByStatus(Store.StoreStatus.APPROVED);
         }
     }
 
@@ -104,12 +102,12 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<Store> getMerchantStores(Long merchantId) {
-        return storeRepository.findByMerchantId(merchantId);
+        return storeRepository.findByOwnerId(merchantId);
     }
 
     @Override
     public List<Store> getStoresByStatus(Store.StoreStatus status) {
-        return storeRepository.findByStatus(status.ordinal());
+        return storeRepository.findByStatus(status);
     }
 
     @Override

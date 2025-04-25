@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,10 +24,9 @@ public class Account {
     @Schema(description = "账户ID", example = "1")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", unique = true)
-    @Schema(description = "关联的用户")
-    private User user;
+    @Column(name = "user_id", nullable = false)
+    @Schema(description = "用户ID")
+    private Long userId;
 
     @Column(precision = 10, scale = 2)
     @Schema(description = "账户余额", example = "1000.00")
@@ -35,9 +35,11 @@ public class Account {
     @Schema(description = "账户状态：0-正常，1-冻结", example = "0")
     private Integer status;
 
+    @Column(name = "create_time")
     @Schema(description = "创建时间")
-    private Long createTime;
+    private LocalDateTime createTime;
 
+    @Column(name = "update_time")
     @Schema(description = "更新时间")
-    private Long updateTime;
+    private LocalDateTime updateTime;
 }
