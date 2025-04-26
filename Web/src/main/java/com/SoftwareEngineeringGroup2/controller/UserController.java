@@ -4,6 +4,8 @@ import com.SoftwareEngineeringGroup2.config.JwtConfig;
 import com.SoftwareEngineeringGroup2.dto.LoginDto;
 import com.SoftwareEngineeringGroup2.dto.RegisterDto;
 import com.SoftwareEngineeringGroup2.dto.UserInfoDto;
+import com.SoftwareEngineeringGroup2.entity.Account;
+import com.SoftwareEngineeringGroup2.service.AccountService;
 import com.SoftwareEngineeringGroup2.service.AuthService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
@@ -33,12 +35,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 public class UserController {
     private final UserService userService;
     private final JwtConfig jwtConfig;
-
+    private final AccountService accountService;
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "新用户注册接口，支持普通用户和商户注册")
     @ApiOperationSupport(order = 1, author = "软件工程第二组")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterDto request) {
-        userService.register(request);
+        User user = userService.register(request);
+        Account account = accountService.createAccount(user);
+        user.setAccountId(account.getId());
+
         return ResponseEntity.ok("注册成功");
     }
 

@@ -29,6 +29,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("用户不存在"));
 
+        if (userDto.getUsername() != null && userDto.getUsername().equals("admin")) {
+            throw new RuntimeException("管理员不能修改用户名");
+        }
+
         if (userDto.getUsername() != null && !userDto.getUsername().equals(user.getUsername())) {
             if (existsByUsername(userDto.getUsername())) {
                 throw new RuntimeException("用户名已存在");
