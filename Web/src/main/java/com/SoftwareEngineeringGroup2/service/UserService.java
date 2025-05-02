@@ -5,6 +5,8 @@ import com.SoftwareEngineeringGroup2.dto.RegisterDto;
 import com.SoftwareEngineeringGroup2.dto.UserUpdateDto;
 import com.SoftwareEngineeringGroup2.entity.User;
 
+import java.util.List;
+
 public interface UserService {
     User register(RegisterDto registerDto);
 
@@ -16,6 +18,8 @@ public interface UserService {
 
     void deleteUser(Long userId);
 
+    User getUserById(Long userId);
+
     User getUserByUsername(String username);
 
     boolean existsByUsername(String username);
@@ -26,4 +30,5 @@ public interface UserService {
 
     User save(User user);
 
+    List<User> getAllUsers();
 }

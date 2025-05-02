@@ -77,6 +77,13 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 
+    @GetMapping("/all")
+    @Operation(summary = "获取所有用户", description = "获取所有用户的信息")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> users() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
     @GetMapping("/me")
     @Operation(summary = "获取当前用户信息", description = "获取当前登录用户的信息")
     public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal User user) {

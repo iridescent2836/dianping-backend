@@ -1,6 +1,7 @@
 package com.SoftwareEngineeringGroup2.controller;
 
 import com.SoftwareEngineeringGroup2.dto.StoreRegistrationDto;
+import com.SoftwareEngineeringGroup2.dto.StoreWithOwnerDTO;
 import com.SoftwareEngineeringGroup2.entity.Store;
 import com.SoftwareEngineeringGroup2.entity.User;
 import com.SoftwareEngineeringGroup2.service.StoreService;
@@ -21,7 +22,7 @@ import java.util.List;
 public class StoreController {
     private final StoreService storeService;
 
-    @PostMapping
+    @PostMapping("/open-shop")
     @Operation(summary = "创建商店", description = "商户创建新商店")
     @PreAuthorize("hasRole('MERCHANT')")
     public ResponseEntity<Store> createStore(@RequestBody StoreRegistrationDto storeDto,
@@ -29,9 +30,11 @@ public class StoreController {
         return ResponseEntity.ok(storeService.createStore(storeDto, user));
     }
 
+
+
     @PutMapping("/{storeId}")
     @Operation(summary = "更新商店", description = "商户更新商店信息")
-    @PreAuthorize("hasRole('MERCHANT')")
+    @PreAuthorize("hasAnyRole('MERCHANT', 'ADMIN')")
     public ResponseEntity<Store> updateStore(@PathVariable Long storeId, @RequestBody StoreRegistrationDto storeDto,
             @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(storeService.updateStore(storeId, storeDto, user));
@@ -39,7 +42,7 @@ public class StoreController {
 
     @DeleteMapping("/{storeId}")
     @Operation(summary = "删除商店", description = "商户删除商店")
-    @PreAuthorize("hasRole('MERCHANT')")
+    @PreAuthorize("hasAnyRole('MERCHANT', 'ADMIN')")
     public ResponseEntity<Void> deleteStore(@PathVariable Long storeId, @AuthenticationPrincipal User user) {
         storeService.deleteStore(storeId, user.getId());
         return ResponseEntity.ok().build();
@@ -71,5 +74,18 @@ public class StoreController {
     @Operation(summary = "获取商店详情", description = "获取指定商店的详细信息")
     public ResponseEntity<Store> getStore(@PathVariable Long storeId) {
         return ResponseEntity.ok(storeService.getStore(storeId));
+    }
+
+
+    @GetMapping("/all-stores")
+    @Operation(summary = "获取所有商店", description = "管理员获取所有商店信息")
+    public ResponseEntity<List<Store>> getAllStores() {
+        return ResponseEntity.ok(storeService.getAllStores());
+    }
+
+    @GetMapping("/all-stores-admin")
+    @Operation(summary = "获取所有商店及其所有者信息", description = "管理员获取所有商店信息")
+    public ResponseEntity<List<StoreWithOwnerDTO>> getAllStoresWithOwner() {
+        return ResponseEntity.ok(storeService.getAllStoresWithOwners());
     }
 }

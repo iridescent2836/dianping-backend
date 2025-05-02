@@ -11,4 +11,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     List<Store> findByOwnerId(Long merchantId);
 
     List<Store> findByStatus(Store.StoreStatus status);
+
+    List<Store> findAll();
 }

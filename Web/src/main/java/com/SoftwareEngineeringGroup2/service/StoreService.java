@@ -1,6 +1,7 @@
 package com.SoftwareEngineeringGroup2.service;
 
 import com.SoftwareEngineeringGroup2.dto.StoreRegistrationDto;
+import com.SoftwareEngineeringGroup2.dto.StoreWithOwnerDTO;
 import com.SoftwareEngineeringGroup2.entity.Store;
 import com.SoftwareEngineeringGroup2.entity.User;
 
@@ -23,5 +24,9 @@ public interface StoreService {
 
     List<Store> getStoresByStatus(Store.StoreStatus status);
 
+    List<Store> getAllStores();
+
     Store getStore(Long storeId);
+
+    List<StoreWithOwnerDTO> getAllStoresWithOwners();
 }

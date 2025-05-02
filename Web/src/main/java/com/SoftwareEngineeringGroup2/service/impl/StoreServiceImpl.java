@@ -1,6 +1,7 @@
 package com.SoftwareEngineeringGroup2.service.impl;
 
 import com.SoftwareEngineeringGroup2.dto.StoreRegistrationDto;
+import com.SoftwareEngineeringGroup2.dto.StoreWithOwnerDTO;
 import com.SoftwareEngineeringGroup2.entity.Store;
 import com.SoftwareEngineeringGroup2.entity.User;
 import com.SoftwareEngineeringGroup2.repository.StoreRepository;
@@ -12,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
+    private final UserServiceImpl userServiceImpl;
+
     @Override
     @Transactional
     public Store createStore(StoreRegistrationDto storeDto, User user) {
@@ -95,6 +99,11 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public List<Store> getAllStores(){
+        return storeRepository.findAll();
+    }
+
+    @Override
     public Store getStoreById(Long id) {
         return storeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("商店不存在"));
@@ -115,4 +124,22 @@ public class StoreServiceImpl implements StoreService {
         return storeRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("商店不存在"));
     }
+
+    @Override
+    public List<StoreWithOwnerDTO> getAllStoresWithOwners() {
+        return storeRepository.findAll().stream()
+            .map(store -> {
+                User owner =userServiceImpl.getUserById(store.getOwnerId());
+                return new StoreWithOwnerDTO(
+                    store.getId(),
+                    store.getName(),
+                    store.getDescription(),
+                    store.getCategories(),
+                    owner.getId(),
+                    owner.getUsername()
+                );
+            })
+            .collect(Collectors.toList());
+    }
+
 }
