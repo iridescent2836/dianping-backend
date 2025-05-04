@@ -43,7 +43,7 @@ public class UserController {
         User user = userService.register(request);
         Account account = accountService.createAccount(user);
         user.setAccountId(account.getId());
-
+        userService.save(user);
         return ResponseEntity.ok("注册成功");
     }
 

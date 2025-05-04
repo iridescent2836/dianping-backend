@@ -30,6 +30,7 @@ public class FileController {
         }
     }
 
+
     @PostMapping("/upload/store")
     @Operation(summary = "上传商店Logo", description = "上传商店Logo，返回图片URL")
     @ApiOperationSupport(order = 2, author = "软件工程第二组")

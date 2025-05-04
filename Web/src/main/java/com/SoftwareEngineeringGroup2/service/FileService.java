@@ -36,6 +36,8 @@ public class FileService {
         file.transferTo(dest);
 
         // 返回访问URL
+        // /uploads/prodocts/{filename}
         return urlPrefix + "/" + type + "/" + filename;
     }
+
 }
